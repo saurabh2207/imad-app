@@ -4,15 +4,31 @@ var path = require('path');
 
 var app = express();
 app.use(morgan('combined'));
-
-var articleOne={
-    title:`Article one`,
+var articles = {
+    "article-One":{title:`Article one`,
     heading:`Article 1`,
     date:`5 August,2017`,
     content:`<p>this is the web page for article 1 , aaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaa aaaaaaaa</p>
              <br>
-             <p>this the first article webpage</p>`
+             <p>this is the first article webpage</p>`},
+             
+    "article-Two":{title:`Article Two`,
+    heading:`Article 2`,
+    date:`5 August,2017`,
+    content:`<p>this is the web page for article 1 , aaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaa aaaaaaaa</p>
+             <br>
+             <p>this is the second article webpage</p>`},
+             
+    "article-Three":{ title:`Article Three`,
+    heading:`Article 3`,
+    date:`5 August,2017`,
+    content:`<p>this is the web page for article 1 , aaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaa aaaaaaaa</p>
+             <br>
+             <p>this is the third article webpage</p>`}
 };
+    
+
+
 function createTemplate(data){
     var title=data.title;
     var date=data.date;
@@ -57,17 +73,11 @@ app.get('/ui/madi.png', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
 });
 
-app.get('/article-one', function(req, res){
-    res.send(path.join(createTemplate(articleOne)));
+app.get('/:articleName', function(req, res){
+    res.send(path.join(createTemplate(articleName)));
 });
 
-app.get('/article-three', function(req, res){
-    res.send('article three is requested');
-});
 
-app.get('/article-two', function(req, res){
-    res.send('article two is requested');
-});
 // Do not change port, otherwise your app won't run on IMAD servers
 // Use 8080 only for local development if you already have apache running on 80
 
